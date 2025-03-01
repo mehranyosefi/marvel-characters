@@ -1,0 +1,21 @@
+@font-face {
+  font-family: "Times Crimson";
+  src: url("./source/Crimson-Bold.ttf") format("truetype");
+  font-weight: bolder;
+  font-style: normal;
+  font-stretch: normal;
+}
+@font-face {
+  font-family: "Times Crimson";
+  src: url("./source/Crimson-Semibold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+}
+@font-face {
+  font-family: "Times Crimson";
+  src: url("./source/Crimson-Roman.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+}
