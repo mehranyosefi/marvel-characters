@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import type { ShallowRef } from "vue";
-
 const props = withDefaults(
   defineProps<{
     type?: "button" | "submit" | "reset";
@@ -19,9 +17,21 @@ const props = withDefaults(
 );
 
 const router = useRouter();
-const getOutlinedClasses: ShallowRef = shallowRef<string>(
-  `bg-transparent !text-${props.color}-500 hover:bg-${props.color}-500 hover:border-${props.color}-500 hover:!text-white`
-);
+
+function getClasses(): string {
+  const classes = {
+    red: `bg-red-500 border-red-500`,
+    blue: "bg-blue-500 border-blue-500",
+  };
+  return classes[props.color] ?? classes.red;
+}
+function getOulinedClasses(): string {
+  const classes = {
+    red: `text-red-500 hover:bg-red-500 hover:text-white`,
+    blue: "text-blue-500 hover:bg-blue-500 hover:text-white",
+  };
+  return classes[props.color] ?? classes.red;
+}
 
 function handleClik(): void {
   if (props.to) router.push(props.to);
@@ -30,8 +40,11 @@ function handleClik(): void {
 
 <template>
   <button
-    class="border rounded-lg cursor-pointer flex items-center justify-center transition-all duration-300"
-    :class="[`bg-${color}-500`]"
+    class="btn border p-1 rounded cursor-pointer flex items-center justify-center transition-all duration-300 hover:brightness-125"
+    :class="[
+      getClasses(),
+      outlined ? `${getOulinedClasses()} bg-transparent` : null,
+    ]"
     :type="type"
     @click="handleClik"
   >
@@ -45,8 +58,3 @@ function handleClik(): void {
 </template>
 
 <style scoped></style>
-<!-- :class="[
-outlined
-  ? `bg-transparent !text-${color}-500 hover:bg-${color}-500 hover:border-${color}-500 hover:!text-white`
-  : `bg-${color}-500 border-${color}-900 text-white`,
-]" -->

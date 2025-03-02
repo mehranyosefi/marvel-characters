@@ -3,15 +3,15 @@ useHead({
   titleTemplate: `maravel - %s`,
   htmlAttrs: {
     lang: "fa",
-    dir: "rtl",
+    dir: "ltr",
   },
 });
 </script>
 
 <template>
-  <div class="root-element">
+  <div class="root-element 2xl:container">
     <slot name="header">
-      <header>header</header>
+      <UiHeader />
     </slot>
     <main>
       <slot></slot>

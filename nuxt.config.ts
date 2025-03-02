@@ -10,9 +10,16 @@ export default defineNuxtConfig({
     },
     // pageTransition: { name: "page", mode: "out-in" },
   },
+  modules: ["@nuxt/image"],
   vite: {
     plugins: [tailwindcss()],
   },
-  components: true,
   css: ["~/assets/styles/main.css"],
+  runtimeConfig: {
+    public: {
+      baseUrlApi: process.env.NUXT_BASE_URL_API,
+      apiKey: process.env.NUXT_API_KEY,
+      privateKey: process.env.NUXT_PRIVATE_KEY,
+    },
+  },
 });
