@@ -1,15 +1,6 @@
 @import "tailwindcss";
 @import "./fonts/times.css";
-@theme {
-  --color-white: #fff;
-  --color-black: #111;
-  --color-red-500: #dc2626;
-  --color-gray-400: #3b3d3f;
-  --color-gray-500: #404244;
-  --color-gray-600: #2c2e30;
-  --color-gray-800: #0e0e0e;
-  --font-sans: "Times Crimson";
-}
+@import "./themeCustomizing.css";
 
 @layer base {
   html {
@@ -20,14 +11,21 @@
   }
 }
 
-/* @layer components {
-    .card {
-      background-color: var(--color-white);
-      border-radius: var(--rounded-lg);
-      padding: var(--spacing-6);
-      box-shadow: var(--shadow-xl);
-    }
-  } */
+@layer components {
+  .drop-drawer-enter-active {
+    @apply transition-all duration-200 ease-in-out;
+  }
+  .drop-drawer-leave-active {
+    transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+  }
+  .drop-drawer-enter-from,
+  .drop-drawer-leave-to {
+    @apply -translate-y-[10px] opacity-0;
+  }
+  .loader {
+    @apply animate-spin bg-transparent border-[3.5px] rounded-full border-white/50 border-b-white border-l-white size-[1.3rem];
+  }
+}
 /* @utility content-auto {
     content-visibility: auto;
   }

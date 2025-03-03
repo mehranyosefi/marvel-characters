@@ -6,6 +6,7 @@ const props = withDefaults(
     isLoading?: boolean;
     to?: string;
     outlined?: boolean;
+    vapid?: boolean;
   }>(),
   {
     type: "button",
@@ -13,6 +14,7 @@ const props = withDefaults(
     isLoading: false,
     to: undefined,
     outlined: false,
+    vapid: false,
   }
 );
 
@@ -40,10 +42,14 @@ function handleClik(): void {
 
 <template>
   <button
-    class="btn border p-1 rounded cursor-pointer flex items-center justify-center transition-all duration-300 hover:brightness-125"
+    class="btn border p-2 rounded cursor-pointer flex items-center justify-center transition-all duration-300 hover:brightness-125 disabled:cursor-auto disabled:text-gray-500 disabled:hover:!bg-transparent"
     :class="[
       getClasses(),
       outlined ? `${getOulinedClasses()} bg-transparent` : null,
+      { ['border-none bg-transparent ']: vapid },
+      {
+        ['!cursor-not-allowed !select-none brightness-90']: isLoading,
+      },
     ]"
     :type="type"
     @click="handleClik"

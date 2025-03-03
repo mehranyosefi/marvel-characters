@@ -36,7 +36,7 @@ const style = computed(() => {
   <div class="menu-global" ref="menu">
     <slot name="activator"></slot>
     <Teleport to="body">
-      <transition name="fade">
+      <transition name="drop-drawer">
         <div
           v-if="active"
           ref="menuContent"
@@ -52,15 +52,4 @@ const style = computed(() => {
   </div>
 </template>
 
-<style>
-@reference "@/assets/styles/main.css";
-.menu {
-  @apply absolute overflow-y-auto p-0 m-0 rounded-b-xl max-w-full min-h-10 border-b border-r border-l border-gray-100 text-black max-h-48;
-  li {
-    @apply cursor-pointer p-2;
-    &:hover {
-      @apply bg-gray-200;
-    }
-  }
-}
-</style>
+<style scoped></style>

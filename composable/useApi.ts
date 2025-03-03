@@ -4,16 +4,16 @@ export function useAPI<T>(
   options?: UseFetchOptions<T>
 ) {
   const runtimeConfig = useRuntimeConfig();
-  const overrideOptions = {
+  const overridedOptions = {
     ...options,
     headers: {
       ...options?.headers,
-      "Content-Type": "application/json",
       Accept: "application/json",
+      "Content-Type": "application/json",
     },
   };
   return useFetch((runtimeConfig.public.baseUrlApi as string) + url, {
-    ...overrideOptions,
+    ...overridedOptions,
     $fetch: useNuxtApp().$api as typeof $fetch,
   });
 }

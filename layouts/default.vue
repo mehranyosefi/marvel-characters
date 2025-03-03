@@ -9,15 +9,12 @@ useHead({
 </script>
 
 <template>
-  <div class="root-element 2xl:container">
+  <div class="root-element 3xl:container mx-auto">
     <slot name="header">
       <UiHeader />
     </slot>
     <main>
       <slot></slot>
     </main>
-    <footer>
-      <slot name="footer"> footer </slot>
-    </footer>
   </div>
 </template>
