@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 useHead({
-  titleTemplate: `maravel - %s`,
+  titleTemplate: `marvel - %s`,
   htmlAttrs: {
     lang: "fa",
     dir: "ltr",
