@@ -22,4 +22,9 @@ export default defineNuxtConfig({
       privatekey: process.env.NUXT_PRIVATE_KEY,
     },
   },
+  image: {
+    // force ipx, as otherwise it would default to using Netlify Image CDN (which probably is better to use, but issue is about ipx)
+    provider: "ipx",
+    domains: ["secure.woonuxt.com"],
+  },
 });
