@@ -10,9 +10,8 @@
     ></section>
     <div class="header__logo">
       <h1>
-        <nuxt-link to="/" class="inline-block w-fit">
-          <!-- //TODO fix problem with nuxtimg on netlify -->
-          <NuxtImg sizes="52" src="/img/logo.png" />
+        <nuxt-link to="/" aria-label="logo" class="inline-block w-fit">
+          <NuxtImg sizes="52" src="/img/logo.png" alt="marvel logo" />
         </nuxt-link>
       </h1>
     </div>

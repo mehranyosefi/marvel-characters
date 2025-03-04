@@ -30,9 +30,8 @@ useHead({
   <NuxtLayout name="default">
     <template #headerSlot>
       <div class="mt-14 flex flex-col md:flex-row gap-y-6 gap-x-10 mb-8">
-        <!-- //TODO fix problem with nuxtimg on netlify -->
         <NuxtImg
-          class="rounded max-h-[180px]"
+          class="rounded max-h-[180px] object-cover"
           width="180"
           height="180"
           :src="`${characterItem.thumbnail.path}.${characterItem.thumbnail.extension}`"

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { NuxtImg } from "#components";
 import getCharacters from "@/repository/modules/character";
+import { useDebounce } from "~/composable/useDebounce";
 import type { CharacterInterface } from "~/types";
 const activeMenu = shallowRef<boolean>(false);
 
@@ -32,7 +33,11 @@ async function triggerSearch() {
 }
 
 watch(searchInput, (val: string) => {
-  if (val.length < 2) activeMenu.value = false;
+  if (val.length < 3) activeMenu.value = false;
+  else
+    useDebounce(() => {
+      triggerSearch();
+    }, 1000)();
 });
 </script>
 
