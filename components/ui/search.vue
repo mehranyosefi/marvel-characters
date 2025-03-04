@@ -59,7 +59,7 @@ watch(searchInput, (val: string) => {
                 @click="triggerSearch()"
                 :is-loading="false"
               >
-                <NuxtImg src="/img/search-normal.svg" class="size-5"></NuxtImg>
+                <img src="/img/search-normal.svg" class="size-5" />
               </base-btn>
             </template>
           </base-input>

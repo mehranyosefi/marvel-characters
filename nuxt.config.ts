@@ -23,8 +23,6 @@ export default defineNuxtConfig({
     },
   },
   image: {
-    // force ipx, as otherwise it would default to using Netlify Image CDN (which probably is better to use, but issue is about ipx)
-    provider: "ipx",
-    domains: ["i.annihil.us"],
+    domains: ["i.annihil.us", "gateway.marvel.com"],
   },
 });
