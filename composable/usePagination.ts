@@ -3,13 +3,14 @@ import { useRoute, useRouter } from "vue-router";
 import type { ComputedRef } from "vue";
 import { useDebounce } from "./useDebounce";
 import { useAPI } from "./useApi";
+import type { DataPaginationInterface } from "~/types";
 
 export function usePagination(baseUrl: string) {
   const route = useRoute();
   const router = useRouter();
   const page = shallowRef<number>(Number(route.query.page) || 1);
   const limit = shallowRef<number>(12);
-  const data = ref<any>([]);
+  const data = ref<DataPaginationInterface>();
   const error = ref<{ message: string }>({ message: "" });
   const loading = shallowRef<boolean>(false);
 
@@ -17,7 +18,7 @@ export function usePagination(baseUrl: string) {
     () => limit.value * (page.value - 1)
   );
   const totalPages: ComputedRef<number> = computed(() => {
-    return Math.ceil(data.value.total / limit.value);
+    return Math.ceil(data.value?.total ?? 1 / limit.value);
   });
   const paginationNumbers: ComputedRef<(string | number)[]> = computed(() => {
     let pageNumbers: Array<number | string> = [];
@@ -67,7 +68,12 @@ export function usePagination(baseUrl: string) {
   async function fetchPaginatedData(url: string): Promise<any> {
     loading.value = true;
     try {
-      const { data: resData, status } = await useAPI(url);
+      const { data: resData, status } = await useAPI(url, {
+        query: {
+          limit: limit.value,
+          offset: offset.value,
+        },
+      });
       if (status.value === "success") {
         data.value = resData.value.data;
         loading.value = false;
@@ -97,16 +103,17 @@ export function usePagination(baseUrl: string) {
     }
   }
   const debounceFetch = useDebounce(() => {
-    fetchPaginatedData(
-      `${baseUrl}&limit=${limit.value}&offset=${offset.value}`
-    );
+    fetchPaginatedData(baseUrl);
   }, 1000);
 
-  watch([() => route.query.page, () => route.query.limit], () => {
-    loading.value = true;
-    debounceFetch();
-  });
-  watchEffect(() => {
+  const { stop: stopWatch } = watch(
+    [() => route.query.page, () => route.query.limit],
+    () => {
+      loading.value = true;
+      debounceFetch();
+    }
+  );
+  const { stop: stopWatchEffect } = watchEffect(() => {
     if (totalPages.value <= page.value) {
       page.value = totalPages.value;
     }
@@ -119,8 +126,15 @@ export function usePagination(baseUrl: string) {
       },
     });
   });
+  onMounted(() => {
+    //without onMounted hook accur hydration misMatches error
+    onBeforeRouteLeave(() => {
+      stopWatch();
+      stopWatchEffect();
+    });
+  });
+  fetchPaginatedData(baseUrl);
 
-  fetchPaginatedData(`${baseUrl}&limit=${limit.value}&offset=${offset.value}`);
   return {
     page,
     limit,
@@ -129,5 +143,6 @@ export function usePagination(baseUrl: string) {
     totalPages,
     paginationNumbers,
     changePage,
+    fetchPaginatedData,
   };
 }

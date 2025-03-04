@@ -24,6 +24,7 @@ function getClasses(): string {
   const classes = {
     red: `bg-red-500 border-red-500`,
     blue: "bg-blue-500 border-blue-500",
+    white: "bg-white border-white",
   };
   return classes[props.color] ?? classes.red;
 }
@@ -31,6 +32,7 @@ function getOulinedClasses(): string {
   const classes = {
     red: `text-red-500 hover:bg-red-500 hover:text-white`,
     blue: "text-blue-500 hover:bg-blue-500 hover:text-white",
+    white: "!bg-transparent text-white hover:!bg-white hover:text-black",
   };
   return classes[props.color] ?? classes.red;
 }

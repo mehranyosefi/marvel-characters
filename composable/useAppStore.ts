@@ -3,19 +3,22 @@ import { md5 } from "~/utility";
 
 export const useAppStore = defineStore("app", () => {
   const runtimeConfig = useRuntimeConfig();
-  function compoutedParams() {
+
+  const paramsObject = Object.fromEntries(compoutedUrlParams());
+
+  function compoutedUrlParams() {
     const ts = "1";
-    const params = new URLSearchParams({
+    return new URLSearchParams({
       ts,
       apikey: runtimeConfig.public.apikey,
       hash: md5(
         ts + runtimeConfig.public.privatekey + runtimeConfig.public.apikey
       ),
     });
-    return params;
   }
 
   return {
-    compoutedParams,
+    paramsObject,
+    compoutedUrlParams,
   };
 });

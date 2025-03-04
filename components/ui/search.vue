@@ -1,26 +1,48 @@
 <script setup lang="ts">
 import getCharacters from "@/repository/modules/character";
+import type { CharacterInterface } from "~/types";
 const activeMenu = shallowRef<boolean>(false);
 
 const searchInput = shallowRef<string>("");
 const character = new getCharacters();
+const searchItems = ref<CharacterInterface[]>([]);
+const searchLoading = shallowRef<boolean>(false);
 
 async function triggerSearch() {
   if (searchInput.value.length <= 2) return;
-  try {
-    const { data, status, error } = await character.getCharactersByName(
-      searchInput.value
-    );
-  } catch (e) {
-    console.log(e);
+  searchLoading.value = true;
+  activeMenu.value = true;
+  searchItems.value = [];
+  const { data, status, error } = await character.getCharactersByName(
+    searchInput.value
+  );
+  if (error.value)
+    throw createError({
+      message: error.value.message,
+      status: error.value.status,
+      fatal: true,
+    });
+  if (status.value === "success") {
+    const res = data.value.data.results;
+
+    console.log("searchItems", data.value.data.results);
+    if (res.length) searchItems.value = res;
   }
-  console.log(data);
+  searchLoading.value = false;
 }
+
+watch(searchInput, (val: string) => {
+  if (val.length < 2) activeMenu.value = false;
+});
 </script>
 
 <template>
   <div class="search">
-    <base-menu :active="activeMenu">
+    <base-menu
+      :active="activeMenu"
+      @deactivate="activeMenu = false"
+      id="exseption-deactive"
+    >
       <template #activator>
         <div
           class="bg-gray-600 p-6 rounded"
@@ -34,19 +56,54 @@ async function triggerSearch() {
           >
             <template #append>
               <base-btn
-                class="size-10"
+                class="size-14"
                 @click="triggerSearch()"
                 :is-loading="false"
               >
-                <NuxtImg src="/img/search-normal.svg" class="size-4"></NuxtImg>
+                <NuxtImg src="/img/search-normal.svg" class="size-5"></NuxtImg>
               </base-btn>
             </template>
-            <template #items> items </template>
           </base-input>
+        </div>
+      </template>
+      <template #items>
+        <div
+          class="min-h-20 max-h-60 overflow-y-auto rounded-b p-4"
+          v-click-outside:exseption-deactive="() => (activeMenu = false)"
+        >
+          <template v-if="searchLoading">
+            <div class="loader size-9 mx-auto mt-6"></div>
+          </template>
+          <template v-else>
+            <div v-if="!searchItems.length" class="text-center mt-6 text-lg">
+              !موردی پیدا نشد
+            </div>
+            <div
+              v-else
+              class="flex flex-col justify-center items-center md:flex-row md:gap-x-4"
+            >
+              <base-character-item
+                v-for="character in searchItems"
+                :key="character.id"
+                :name="character.name"
+                :to="character.name"
+                :thumbnail="character.thumbnail"
+                class="search__characterItem"
+              ></base-character-item>
+            </div>
+          </template>
         </div>
       </template>
     </base-menu>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+@reference "~/assets/styles/main.css";
+.search__characterItem :deep(img) {
+  @apply size-28;
+}
+.search__characterItem :deep(div) {
+  @apply text-center;
+}
+</style>

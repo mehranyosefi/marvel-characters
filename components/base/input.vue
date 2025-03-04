@@ -29,7 +29,7 @@ function handleKeyDown(e: KeyboardEvent): void {
         v-bind="$attrs"
         v-model="model"
         @keydown="handleKeyDown"
-        class="grow border-none outline-none rounded py-2 px-2 bg-gray-500"
+        class="grow border-none outline-none rounded py-4 px-2 bg-gray-500 text-lg"
       />
       <slot name="append"></slot>
     </div>

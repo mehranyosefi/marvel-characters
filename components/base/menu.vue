@@ -13,7 +13,7 @@ const props = withDefaults(
     mLeft: 0,
     mTop: 0,
     mWidth: 0,
-    classes: "bg-white",
+    classes: "",
   }
 );
 
@@ -35,13 +35,14 @@ const style = computed(() => {
 <template>
   <div class="menu-global" ref="menu">
     <slot name="activator"></slot>
-    <Teleport to="body">
+    <Teleport to="#teleports">
       <transition name="drop-drawer">
         <div
           v-if="active"
           ref="menuContent"
           :style="style"
-          :class="['menu', classes]"
+          :class="[classes]"
+          class="fixed min-h-20 z-20 bg-linear-65 from-gray-500 to-gray-800 shadow-xl rounded-b"
         >
           <slot name="prepend-item"></slot>
           <slot name="items"></slot>

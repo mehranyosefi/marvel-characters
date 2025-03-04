@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-// function compoutedParams() {
+// function compoutedUrlParams() {
 //   const ts: string = Date.now().toString();
 //   const params = new URLSearchParams({
 //     ts,
@@ -13,7 +13,7 @@
 //   return params;
 // }
 // const { data } = await useFetch(
-//   "https://gateway.marvel.com/v1/public" + "/characters?" + compoutedParams(),
+//   "https://gateway.marvel.com/v1/public" + "/characters?" + compoutedUrlParams(),
 //   {
 //     headers: {
 //       Accept: "application/json",

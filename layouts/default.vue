@@ -10,9 +10,9 @@ useHead({
 
 <template>
   <div class="root-element 3xl:container mx-auto">
-    <slot name="header">
-      <UiHeader />
-    </slot>
+    <UiHeader>
+      <slot name="headerSlot"></slot>
+    </UiHeader>
     <main>
       <slot></slot>
     </main>

@@ -12,7 +12,8 @@ export function useAPI<T>(
       "Content-Type": "application/json",
     },
   };
-  return useFetch((runtimeConfig.public.baseUrlApi as string) + url, {
+  return useFetch(url, {
+    baseURL: runtimeConfig.public.baseUrlApi,
     ...overridedOptions,
     $fetch: useNuxtApp().$api as typeof $fetch,
   });

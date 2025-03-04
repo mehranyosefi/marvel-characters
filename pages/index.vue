@@ -6,7 +6,6 @@ useHead({
 });
 
 const appStore = useAppStore();
-const baseUrl = `/characters?${appStore.compoutedParams()}`;
 
 const {
   changePage,
@@ -16,23 +15,31 @@ const {
   data: dataResult,
   loading,
   limit,
-} = usePagination(baseUrl);
+  fetchPaginatedData,
+} = usePagination(`/characters?${appStore.compoutedUrlParams()}`);
+
+// await fetchPaginatedData(baseUrl);
 </script>
 
 <template>
   <NuxtLayout name="default">
-    <nuxt-link to="/test">test</nuxt-link>
-    <div
-      class="py-5 px-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-5 gap-y-10"
-    >
+    <template #headerSlot>
+      <div class="header__searchbar mt-5">
+        <ui-search></ui-search>
+      </div>
+    </template>
+    <div class="grid-template py-5 px-10">
       <template v-if="!loading">
-        <base-character-item
+        <nuxt-link
           v-for="character in dataResult?.results"
           :key="character.id"
-          :name="character.name"
-          :to="character.name"
-          :thumbnail="character.thumbnail"
-        ></base-character-item>
+          :to="`/characters/${character.id}`"
+        >
+          <base-character-item
+            :name="character.name"
+            :thumbnail="character.thumbnail"
+          />
+        </nuxt-link>
       </template>
       <template v-else>
         <div
@@ -47,7 +54,6 @@ const {
         </div>
       </template>
     </div>
-
     <ui-pagination
       v-show="totalPages"
       class="mt-16 my-10"

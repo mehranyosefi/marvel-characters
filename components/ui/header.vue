@@ -2,22 +2,20 @@
 
 <template>
   <header
-    class="header sticky z-10 top-0 bg-linear-65 py-5 px-10 from-gray-500 to-gray-800 overflow-hidden"
+    class="header relative z-10 py-5 px-10 bg-linear-65 from-gray-500 to-gray-800 overflow-hidden"
   >
     <slot name="prepend"></slot>
-    <slot>
-      <section
-        class="header__spotlight absolute hidden md:block left-1/5 top-0 bottom-0 bg-red-500/32 blur-2xl rounded-full w-[150px] -z-10"
-      ></section>
-      <div class="header__logo">
+    <section
+      class="header__spotlight absolute left-[3rem] bottom-[25%] md:left-[12rem] md:top-[10%] bg-red-500/32 blur-3xl rounded-full w-[200px] h-[200px] -z-10"
+    ></section>
+    <div class="header__logo">
+      <h1>
         <nuxt-link to="/" class="inline-block w-fit">
-          <NuxtImg sizes="56" src="/img/logo.png" />
+          <NuxtImg sizes="52" src="/img/logo.png" />
         </nuxt-link>
-      </div>
-      <div class="header__searchbar mt-5">
-        <ui-search></ui-search>
-      </div>
-    </slot>
+      </h1>
+    </div>
+    <slot></slot>
     <slot name="prepend"></slot>
   </header>
 </template>
