@@ -25,7 +25,6 @@ async function triggerSearch() {
   if (status.value === "success") {
     const res = data.value.data.results;
 
-    console.log("searchItems", data.value.data.results);
     if (res.length) searchItems.value = res;
   }
   searchLoading.value = false;
@@ -72,7 +71,7 @@ watch(searchInput, (val: string) => {
           v-click-outside:exseption-deactive="() => (activeMenu = false)"
         >
           <template v-if="searchLoading">
-            <div class="loader size-9 mx-auto mt-6"></div>
+            <div class="loader size-9 mx-auto mt-5"></div>
           </template>
           <template v-else>
             <div v-if="!searchItems.length" class="text-center mt-6 text-lg">
@@ -80,16 +79,19 @@ watch(searchInput, (val: string) => {
             </div>
             <div
               v-else
-              class="flex flex-col justify-center items-center md:flex-row md:gap-x-4"
+              class="flex flex-col items-center md:flex-row md:gap-x-4"
             >
-              <base-character-item
+              <nuxt-link
                 v-for="character in searchItems"
                 :key="character.id"
-                :name="character.name"
-                :to="character.name"
-                :thumbnail="character.thumbnail"
-                class="search__characterItem"
-              ></base-character-item>
+                :to="`/characters/${character.id}`"
+              >
+                <base-character-item
+                  :name="character.name"
+                  :thumbnail="character.thumbnail"
+                  class="search__characterItem"
+                ></base-character-item>
+              </nuxt-link>
             </div>
           </template>
         </div>

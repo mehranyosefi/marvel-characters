@@ -19,6 +19,11 @@ const characterItem: ComputedRef<CharacterInterface> = computed(
 );
 const comicsItems = computed(() => data.value?.[1]?.data.results);
 const seriesItems = computed(() => data.value?.[2]?.data.results);
+
+useHead({
+  title: characterItem.value.name,
+  meta: [{ name: "description", content: characterItem.value.description }],
+});
 </script>
 
 <template>
@@ -26,7 +31,7 @@ const seriesItems = computed(() => data.value?.[2]?.data.results);
     <template #headerSlot>
       <div class="mt-14 flex flex-col md:flex-row gap-y-6 gap-x-10 mb-8">
         <NuxtImg
-          class="rounded"
+          class="rounded max-h-[180px]"
           width="180"
           height="180"
           :src="`${characterItem.thumbnail.path}.${characterItem.thumbnail.extension}`"
@@ -37,20 +42,20 @@ const seriesItems = computed(() => data.value?.[2]?.data.results);
 
           <div class="flex items-center gap-x-6 flex-nowrap mt-6">
             <base-btn class="gap-x-2 px-4" outlined color="white">
-              <svg class="size-5">
-                <use class="size-5" href="/img/icons.svg#external-link"></use>
+              <svg class="size-6">
+                <use href="/img/icons.svg#external-link"></use>
               </svg>
               <span class="capitalize pt-1 font-semibold">details</span>
             </base-btn>
             <base-btn class="gap-x-2 px-4" outlined color="white">
-              <svg class="size-5">
-                <use class="size-5" href="/img/icons.svg#external-link"></use>
+              <svg class="size-6">
+                <use href="/img/icons.svg#external-link"></use>
               </svg>
               <span class="capitalize pt-1 font-semibold">wiki</span>
             </base-btn>
             <base-btn class="gap-x-2 px-4" outlined color="white">
-              <svg class="size-5">
-                <use class="size-5" href="/img/icons.svg#external-link"></use>
+              <svg class="size-6">
+                <use href="/img/icons.svg#external-link"></use>
               </svg>
               <span class="capitalize pt-1 font-semibold">comiclink</span>
             </base-btn>

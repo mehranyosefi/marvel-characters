@@ -1,12 +1,17 @@
 <script lang="ts" setup>
 import { useAppStore } from "~/composable/useAppStore";
 import { usePagination } from "~/composable/usePagination";
+
 useHead({
   title: "index page",
+  meta: [
+    { name: "description", content: "index page of marvel characters website" },
+  ],
 });
 
 const appStore = useAppStore();
 
+//TODO Ability to fetch data with block navigation option on usePagination
 const {
   changePage,
   page,
@@ -15,10 +20,7 @@ const {
   data: dataResult,
   loading,
   limit,
-  fetchPaginatedData,
 } = usePagination(`/characters?${appStore.compoutedUrlParams()}`);
-
-// await fetchPaginatedData(baseUrl);
 </script>
 
 <template>
@@ -28,7 +30,7 @@ const {
         <ui-search></ui-search>
       </div>
     </template>
-    <div class="grid-template py-5 px-10">
+    <div class="grid-template py-5 px-10" ref="gird-element">
       <template v-if="!loading">
         <nuxt-link
           v-for="character in dataResult?.results"

@@ -13,12 +13,13 @@ export function usePagination(baseUrl: string) {
   const data = ref<DataPaginationInterface>();
   const error = ref<{ message: string }>({ message: "" });
   const loading = shallowRef<boolean>(false);
+  const girdElement = useTemplateRef<null | HTMLElement>("gird-element");
 
   const offset: ComputedRef<number> = computed(
     () => limit.value * (page.value - 1)
   );
   const totalPages: ComputedRef<number> = computed(() => {
-    return Math.ceil(data.value?.total ?? 1 / limit.value);
+    return Math.ceil(data.value?.total / limit.value);
   });
   const paginationNumbers: ComputedRef<(string | number)[]> = computed(() => {
     let pageNumbers: Array<number | string> = [];
@@ -104,6 +105,7 @@ export function usePagination(baseUrl: string) {
   }
   const debounceFetch = useDebounce(() => {
     fetchPaginatedData(baseUrl);
+    girdElement.value?.scrollIntoView({ behavior: "smooth" });
   }, 1000);
 
   const { stop: stopWatch } = watch(
@@ -127,7 +129,7 @@ export function usePagination(baseUrl: string) {
     });
   });
   onMounted(() => {
-    //without onMounted hook accur hydration misMatches error
+    //without onMounted hook Occurrence hydration misMatches error
     onBeforeRouteLeave(() => {
       stopWatch();
       stopWatchEffect();
