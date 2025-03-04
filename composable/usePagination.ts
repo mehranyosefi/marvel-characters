@@ -13,7 +13,7 @@ export function usePagination(baseUrl: string) {
   const data = ref<DataPaginationInterface>();
   const error = ref<{ message: string }>({ message: "" });
   const loading = shallowRef<boolean>(false);
-  const girdElement = useTemplateRef<null | HTMLElement>("gird-element");
+  // const girdElement = useTemplateRef<null | HTMLElement>("gird-element");
 
   const offset: ComputedRef<number> = computed(
     () => limit.value * (page.value - 1)
@@ -105,7 +105,7 @@ export function usePagination(baseUrl: string) {
   }
   const debounceFetch = useDebounce(() => {
     fetchPaginatedData(baseUrl);
-    girdElement.value?.scrollIntoView({ behavior: "smooth" });
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   }, 1000);
 
   const { stop: stopWatch } = watch(

@@ -30,7 +30,7 @@ const {
         <ui-search></ui-search>
       </div>
     </template>
-    <div class="grid-template py-5 px-10" ref="gird-element">
+    <div class="grid-template py-5 px-10">
       <template v-if="!loading">
         <nuxt-link
           v-for="character in dataResult?.results"
