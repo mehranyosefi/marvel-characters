@@ -13,7 +13,7 @@
         <nuxt-link to="/" class="inline-block w-fit">
           <!-- //TODO fix problem with nuxtimg on netlify -->
           <!-- <NuxtImg sizes="52" src="/img/logo.png" /> -->
-          <img width="52" height="52" src="/img/logo.png" />
+          <img width="52" height="52" src="/img/logo.png" alt="logo of page" />
         </nuxt-link>
       </h1>
     </div>

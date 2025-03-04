@@ -42,6 +42,7 @@ useHead({
           width="180"
           height="180"
           :src="`${characterItem.thumbnail.path}.${characterItem.thumbnail.extension}`"
+          :alt="`image of ${characterItem.name}`"
         />
         <div>
           <h2 v-text="characterItem.name" class="text-3xl font-semibold"></h2>

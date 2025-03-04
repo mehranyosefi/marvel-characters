@@ -42,7 +42,7 @@ const style = computed(() => {
           ref="menuContent"
           :style="style"
           :class="[classes]"
-          class="fixed min-h-20 z-20 bg-linear-65 from-gray-500 to-gray-800 shadow-xl rounded-b"
+          class="absolute min-h-20 z-20 bg-linear-65 from-gray-500 to-gray-800 shadow-xl rounded-b"
         >
           <slot name="prepend-item"></slot>
           <slot name="items"></slot>

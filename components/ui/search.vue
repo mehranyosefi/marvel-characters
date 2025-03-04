@@ -59,7 +59,11 @@ watch(searchInput, (val: string) => {
                 @click="triggerSearch()"
                 :is-loading="false"
               >
-                <img src="/img/search-normal.svg" class="size-5" />
+                <img
+                  src="/img/search-normal.svg"
+                  class="size-5"
+                  alt="serch icon"
+                />
               </base-btn>
             </template>
           </base-input>
@@ -71,10 +75,10 @@ watch(searchInput, (val: string) => {
           v-click-outside:exseption-deactive="() => (activeMenu = false)"
         >
           <template v-if="searchLoading">
-            <div class="loader size-9 mx-auto mt-5"></div>
+            <div class="loader size-9 mx-auto mt-2"></div>
           </template>
           <template v-else>
-            <div v-if="!searchItems.length" class="text-center mt-6 text-lg">
+            <div v-if="!searchItems.length" class="text-center mt-3 text-lg">
               !موردی پیدا نشد
             </div>
             <div
