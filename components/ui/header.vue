@@ -6,7 +6,7 @@
   >
     <slot name="prepend"></slot>
     <section
-      class="header__spotlight absolute left-[3rem] bottom-[25%] md:left-[12rem] md:top-[10%] bg-red-500/32 blur-3xl rounded-full w-[200px] h-[200px] -z-10"
+      class="header__spotlight absolute left-[3rem] bottom-[10%] md:left-[15rem] md:top-[10%] bg-red-500/32 blur-3xl rounded-full w-[200px] h-[200px] -z-10"
     ></section>
     <div class="header__logo">
       <h1>
