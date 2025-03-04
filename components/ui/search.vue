@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { NuxtImg } from "#components";
 import getCharacters from "@/repository/modules/character";
 import type { CharacterInterface } from "~/types";
 const activeMenu = shallowRef<boolean>(false);
@@ -59,7 +60,7 @@ watch(searchInput, (val: string) => {
                 @click="triggerSearch()"
                 :is-loading="false"
               >
-                <img
+                <NuxtImg
                   src="/img/search-normal.svg"
                   class="size-5"
                   alt="serch icon"
