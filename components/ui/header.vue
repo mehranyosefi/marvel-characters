@@ -16,7 +16,7 @@
       </h1>
     </div>
     <slot></slot>
-    <slot name="prepend"></slot>
+    <slot name="append"></slot>
   </header>
 </template>
 

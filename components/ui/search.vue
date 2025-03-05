@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { NuxtImg } from "#components";
 import getCharacters from "@/repository/modules/character";
 import { useDebounce } from "~/composable/useDebounce";
 import type { CharacterInterface } from "~/types";

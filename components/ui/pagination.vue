@@ -1,3 +1,15 @@
+<script setup lang="ts">
+const props = defineProps<{
+  page: number;
+  paginationNumbers: Array<string | number>;
+  totalPages: number;
+}>();
+
+const emit = defineEmits<{
+  (event: "changePage", pageNumber: string | number): void;
+}>();
+</script>
+
 <template>
   <nav>
     <div class="flex justify-center items-center py-2 px-4 gap-1">
@@ -50,16 +62,5 @@
     </div>
   </nav>
 </template>
-<script setup lang="ts">
-const props = defineProps<{
-  page: number;
-  paginationNumbers: Array<string | number>;
-  totalPages: number;
-}>();
-
-const emit = defineEmits<{
-  (event: "changePage", pageNumber: string | number): void;
-}>();
-</script>
 
 <style scoped></style>
